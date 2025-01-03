@@ -10,14 +10,18 @@
             overflow: hidden;
             background-color: #000;
         }
-        #t {
-            position: absolute;
-            color: #fff;
-            font-size: 5vw;
-            font-family: monospace;
-            text-align: center;
-            transform: translate(-50%, -50%);
-        }
+#t {
+    position: absolute;
+    color: #fff;
+    font-size: 5vw;
+    font-family: monospace;
+    text-align: center;
+    transform: translate(0%, 0%);
+    left: 0%;
+    top: 0%;
+    white-space: pre-wrap; 
+    word-wrap: break-word;
+    max-width: 90%;
         canvas {
             display: block;
         }
@@ -25,6 +29,15 @@
             #t {
                 font-size: 7vw;
             }
+        }
+        @media (max-width: 480px) {
+            #t {
+                font-size: 8vw;
+            }
+        }
+        html, body {
+        	max-width: 100%;
+        overflow-x: hidden;
         }
     </style>
 </head>
@@ -152,9 +165,14 @@
                 p(a, 0);
                 if (a % 2 == 1) {
                     s = y + "..."; 
+                    t.style.left = "0%";
+                    t.style.transform = "translate(-0%, -0)";
                     m = 66;
                 } else {
                     s = n + "..."; 
+                    t.style.right = "50%";
+                    t.style.left = "unset";
+                    t.style.transform = "translateY(-50%)";
                     m = 22;
                 }
             } else if (a == 13) {

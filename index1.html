@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dilemma</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
+        #t {
+            position: absolute;
+            color: #fff;
+            font-size: 5vw;
+            font-family: monospace;
+            text-align: center;
+            transform: translate(-50%, -50%);
+        }
+        canvas {
+            display: block;
+        }
+        @media (max-width: 600px) {
+            #t {
+                font-size: 7vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="t"></div>
+    <canvas id="g"></canvas>
+    <script>
+        const t = document.getElementById("t");
+        const g = document.getElementById("g");
+        const d = g.getContext("2d");
+        const c = 2 * Math.PI;
+        let a = 0;
+        let s = "";
+        let m = "";
+        const y = "Dia mencintaiku";
+        const n = "Dia tak mencintaiku";
+        let v = 13;
+        let z = "#fff";
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        g.width = w;
+        g.height = h;
+
+        const dailyTasks = [
+            "Cucian piring", 
+            "Cicilan motor", 
+            "Tagihan listrik", 
+            "Sumbangan kondangan", 
+            "Infaq", 
+            "Uang parkir", 
+            "Belanja bulanan", 
+            "Atap bocor", 
+            "Healing", 
+            "Saldo rekening",
+            "Remote TV?",
+            "Baca email spam",
+            "Blockir mantan",
+            "Beli wiskas",
+            "Deadline kerja",
+            "Konsultasi psikolog",
+            "Kapitalis!",
+            "Bakwan dingin",
+            "Lidah buaya",
+            "Paket skincare",
+            "Meng",
+            "Puja paha Zeta",
+            "Puisi?",
+            "Kritik sastra",
+            "Rank mythic",
+            "Grinding",
+            "Cocote!",
+            "Ndasmu!",
+            "Jancox sugoy!",
+            "Buajingan!",
+            "Macet",
+            "Banjir bandang",
+            "Jahe wedang",
+            "Mas polwan",
+            "Sinden jathilan",
+            "Ngereog",
+            "Iuran bpjs",
+            "Urun kaos bsT-4ever",
+            "Wishlist boneka",
+            "Ngonten Onlyfans",
+            "Politik identitas",
+            "Imperialisme",
+            "Lesser evilsm",
+            "Pemersatu bangsa",
+            "youporn",
+            "Kudeta",
+            "Reformasi",
+            "Rengasdengklok",
+            "Blok barat",
+            "Blok timur",
+            "Perang dunia III",
+            "Patriarki",
+            "Bintang kejora",
+            "Papua merdeka",
+            "Telur asin"
+        ];
+
+        function getRandomTask() {
+            return dailyTasks[r(dailyTasks.length)];
+        }
+        function p(i, x) {
+            t.innerHTML = s;
+            t.style.right = m + "%";
+            t.style.top = v + "%";
+            t.style.color = z;
+            d.beginPath();
+            d.strokeStyle = "#202";
+            if (x <= 1) {
+                d.ellipse(w / 2, h / 2, 13, 100, i * c / 13, 0, c / 2);
+            } else if (a < 13) {
+                d.ellipse(r(w), 11 * h / 13, 13, 50, r(13), 0, c);
+            } else {
+                d.ellipse(r(w), r(h), 13, 50, r(13), 0, c);
+            }
+            if (x == 1) {
+                d.fillStyle = "#fff";
+                d.stroke();
+            } else if (x == 2) {
+                d.fillStyle = "#ffffffaa";
+            } else {
+                d.fillStyle = "#202";
+                d.stroke();
+            }
+            d.fill();
+            d.closePath();
+            d.beginPath();
+            d.arc(w / 2, h / 2, 40, 0, c);
+            d.fillStyle = "#fd8";
+            d.fill();
+            d.closePath();
+        }
+        for (let i = 1; i <= 13; i++) {
+            p(i, 1);
+        }
+        function r(a) {
+            return Math.floor(Math.random() * a);
+        }
+        g.addEventListener("mousedown", function () {
+            a++;
+            if (a < 13) {
+                p(a, 0);
+                if (a % 2 == 1) {
+                    s = y + "..."; 
+                    m = 66;
+                } else {
+                    s = n + "..."; 
+                    m = 22;
+                }
+            } else if (a == 13) {
+                p(a, 0);
+                p(r(13), 1);
+                s = "Apakah dia mencintaiku?";
+                m = 50;
+            } else {
+                p(r(13), 0);
+                p(r(13), 1);
+                s = getRandomTask(); 
+                m = r(66);
+                v = r(66);
+                z = "#ffffff66"; 
+            }
+            if (a > 13) {
+                if (a % 2 === 0) {
+                    s = n;
+                } else {
+                    s = y;
+                }
+                z = "#ffffff";
+            }
+            p(a, 2);
+            if (a > 13) {
+                z = "#ffffff66"; 
+                d.font = "2em monospace";
+                d.fillStyle = "#ffffff22"; 
+                d.fillText(getRandomTask(), r(w), r(h));
+            }
+            if (a > 2 * 13 && a <= 2 * 13 + 1) {
+                z = "#ffffff";
+                d.font = "2em monospace";
+                d.fillStyle = "#ffffff";
+                d.fillText(s, r(w), r(h));
+            } else if (a > 2 * 13) {
+                z = "#ffffff33";
+                d.font = "2em monospace";
+                d.fillStyle = "#ffffff22";
+                d.fillText(s, r(w), r(h));
+            }
+        });
+        window.addEventListener("resize", function () {
+            g.width = window.innerWidth;
+            g.height = window.innerHeight;
+            t.style.left = window.innerWidth / 2 + 'px';
+            t.style.top = window.innerHeight / 2 + 'px';
+        });
+    </script>
+</body>
+</html>
